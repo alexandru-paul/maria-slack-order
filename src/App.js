@@ -46,7 +46,7 @@ class App extends Component {
       <div className="App">
         {this.state.username &&
           <div className="welcome-bar">
-            <img src={this.state.avatar} />
+            <img src={this.state.avatar} alt="User Avatar"/>
             <h1>Hello {this.state.username}, and welcome to the Maria Order App</h1>
           </div>
         }
