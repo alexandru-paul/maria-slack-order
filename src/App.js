@@ -27,12 +27,9 @@ class PostMessage extends Component {
     let getprm = this.getQueryString();
     fetch('https://slack.com/api/chat.postEphemeral', {
       method: 'POST',
-      headers: {
-        'Authorization':'Bearer ' + getprm['access_token'],
-        'Content-Type': 'application/json',
-      },
       body: JSON.stringify({
-        channel :'U0MMW23Q9',
+        token:getprm['access_token'],
+        channel :'GFLS780EN',
         text : 'test from oauth app',
         as_user : 'true',
       })
