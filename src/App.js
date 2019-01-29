@@ -56,7 +56,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Authorization {...this.state} />
+        <Authorization {...this.state} getQueryString={this.getQueryString} />
 
         {this.state.username &&
           <PostMessage getQueryString={this.getQueryString}/>

@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 
 class Authorization extends Component {
     logout = (e) => {
-        let logoutUrl = 'https://slack.com/api/auth.revoke?token=' + this.getQueryString('access_token');
+        let logoutUrl = 'https://slack.com/api/auth.revoke?token=' + this.props.getQueryString('access_token');
         e.preventDefault();
         fetch(logoutUrl).then(response => response.json()).then((logoutResponse) => {
           if(logoutResponse.ok) {
