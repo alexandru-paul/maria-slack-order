@@ -1,11 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import './App.css';
 import PostMessage from './components/PostMessage';
+import Authorization from './components/Authorization';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
+      login_error: '',
       username: '',
       avatar: '',
     }
@@ -33,24 +35,32 @@ class App extends Component {
 
   componentDidMount() {
     let getUserDataUrl = 'https://slack.com/api/users.profile.get?token='+ this.getQueryString('access_token');
-    fetch(getUserDataUrl).then(response => response.json()).then((data) => {
-      this.setState({
-        username: data.profile.first_name,
-        avatar: data.profile.image_192,
+    {this.getQueryString('access_token') &&
+      fetch(getUserDataUrl).then(response => response.json()).then((data) => {
+        {!data.ok &&
+          this.setState({
+            login_error: data.error
+          });
+        }
+
+        {data.ok &&
+          this.setState({
+            username: data.profile.first_name,
+            avatar: data.profile.image_192,
+          });
+        }
       });
-    });
+    }
   }
 
   render() {
     return (
       <div className="App">
+        <Authorization {...this.state} />
+
         {this.state.username &&
-          <div className="welcome-bar">
-            <img src={this.state.avatar} alt="User Avatar"/>
-            <h1>Hello {this.state.username}, and welcome to the Maria Order App</h1>
-          </div>
+          <PostMessage getQueryString={this.getQueryString}/>
         }
-        <PostMessage getQueryString={this.getQueryString}/>
       </div>
     );
   }
