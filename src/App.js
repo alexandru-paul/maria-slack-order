@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import PostMessage from './components/PostMessage';
 import Authorization from './components/Authorization';
@@ -59,7 +59,7 @@ class App extends Component {
         <Authorization {...this.state} getQueryString={this.getQueryString} />
 
         {this.state.username &&
-          <PostMessage getQueryString={this.getQueryString}/>
+          <PostMessage {...this.state} getQueryString={this.getQueryString}/>
         }
       </div>
     );

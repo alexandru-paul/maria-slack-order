@@ -21,11 +21,14 @@ class PostMessage extends Component {
   postMessage = (e) => {
     e.preventDefault();
     let getprm = this.props.getQueryString('access_token');
+    let order_message = document.querySelector('.order-msg').value;
+    let food_vendor = document.querySelector('.food-vendor').value;
     let fetchUrl = this.buildUrl('https://slack.com/api/chat.postMessage',{
                     token : getprm,
                     channel :'GFLS780EN',
-                    text : 'test from oauth app',
+                    text : '<@U0MUWKVEY> Hey! I\'d like to order: *' + order_message + '* from: *' + food_vendor + '*',
                     as_user : 'true',
+                    link_names : '1',
                   });
     fetch(fetchUrl).then(response => response.json()).then(data => console.log(data));
   }
@@ -33,7 +36,14 @@ class PostMessage extends Component {
   render() {
     return (
       <div className="post-message-wrapper">
-        <input type="text" className="slack-msg"/>
+        <select className="food-vendor">
+          <option value="">Please Select a Food Vendor</option>
+          <option value="Grafitti">Grafitti</option>
+          <option value="Gustacio">Gustacio</option>
+          <option value="Almondo">Almondo</option>
+          <option value="Fabio">Fabio Pizza</option>
+        </select>
+        <input type="text" name="order" placeholder="Write down your order here:" className="order-msg"/>
         <a href="#" className="send-msg" onClick={this.postMessage}>Send Messnge</a>
       </div>
     );
