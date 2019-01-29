@@ -19,7 +19,6 @@ class PostMessage extends Component {
 }
 
   postMessage = (e) => {
-    e.preventDefault();
     let getprm = this.props.getQueryString('access_token');
     let order_message = document.querySelector('.order-msg').value;
     let food_vendor = document.querySelector('.food-vendor').value;
@@ -30,21 +29,28 @@ class PostMessage extends Component {
                     as_user : 'true',
                     link_names : '1',
                   });
-    fetch(fetchUrl).then(response => response.json()).then(data => console.log(data));
+    e.preventDefault();
+    if(!e.target.classList.contains('disabled')) {
+      fetch(fetchUrl).then(response => response.json()).then(data => console.log(data));
+    }
+  }
+
+  handleDisabled = (e) => {
+    ((document.querySelector('.food-vendor').value !== '') && (document.querySelector('.order-msg').value !== '') ) ? document.querySelector('.send-msg').classList.remove('disabled') : document.querySelector('.send-msg').classList.add('disabled');
   }
 
   render() {
     return (
       <div className="post-message-wrapper">
-        <select className="food-vendor">
+        <select className="food-vendor" onChange={ this.handleDisabled }>
           <option value="">Please Select a Food Vendor</option>
           <option value="Grafitti">Grafitti</option>
           <option value="Gustacio">Gustacio</option>
           <option value="Almondo">Almondo</option>
           <option value="Fabio">Fabio Pizza</option>
         </select>
-        <input type="text" name="order" placeholder="Write down your order here:" className="order-msg"/>
-        <a href="#" className="send-msg" onClick={this.postMessage}>Send Messnge</a>
+        <input type="text" name="order" placeholder="Write down your order here:" className="order-msg" onChange={ this.handleDisabled }/>
+        <a href="#" className="send-msg disabled" onClick={ this.postMessage }>Send Message</a>
       </div>
     );
   }
