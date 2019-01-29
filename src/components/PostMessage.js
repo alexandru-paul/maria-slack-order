@@ -16,7 +16,7 @@ class PostMessage extends Component {
     }
 
     return url;
-}
+  }
 
   postMessage = (e) => {
     let getprm = this.props.getQueryString('access_token');
