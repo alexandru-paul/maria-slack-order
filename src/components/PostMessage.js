@@ -38,7 +38,7 @@ class PostMessage extends Component {
           document.querySelector('.user-feedback').style.zIndex = 1;
           document.querySelector('.food-vendor').value = '';
           document.querySelector('.order-msg').value = '';
-          document.querySelectorAll('a.send-msg, input.order-msg').forEach(el => el.classList.add('disabled'));
+          document.querySelectorAll('a.send-msg, input.order-msg, .menu-link').forEach(el => el.classList.add('disabled'));
         }
       });
     }
