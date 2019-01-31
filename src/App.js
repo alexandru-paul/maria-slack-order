@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import './App.css';
 import PostMessage from './components/PostMessage';
 import Authorization from './components/Authorization';
@@ -46,7 +46,7 @@ class App extends Component {
         {data.ok &&
           this.setState({
             username: data.profile.first_name,
-            avatar: data.profile.image_192,
+            avatar: data.profile.image_48,
           });
         }
       });
@@ -55,13 +55,16 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <Authorization {...this.state} getQueryString={this.getQueryString} />
-
-        {this.state.username &&
-          <PostMessage {...this.state} getQueryString={this.getQueryString}/>
-        }
-      </div>
+      <Fragment>
+        <div className="header container">
+          <Authorization {...this.state} getQueryString={this.getQueryString} />
+        </div>
+        <div className="app container">
+          {this.state.username &&
+            <PostMessage {...this.state} getQueryString={this.getQueryString}/>
+          }
+        </div>
+      </Fragment>
     );
   }
 }

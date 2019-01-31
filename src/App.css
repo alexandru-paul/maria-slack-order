@@ -1,0 +1,100 @@
+.container {
+    width: 80%;
+    max-width: 1080px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.header {
+    position: relative;
+}
+
+.welcome-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    padding: 20px 0px;
+}
+
+.welcome-bar .user-info {
+    display: flex;
+    align-items: center;
+}
+
+.welcome-bar .user-info img {
+    border-radius: .25rem;
+}
+
+.welcome-bar .user-info .username {
+    margin-left: 10px;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+}
+
+.login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.login_title {
+    margin-top: 0px;
+    margin-bottom: 30px;
+}
+
+.login a, .post-message-wrapper .send-msg {
+    display: inline-block;
+    align-self: center;
+    padding: 10px 30px;
+    background-color: #007a5a;
+    color: #fff;
+    border-radius: .25rem;
+    font-weight: bold;
+    text-decoration: none;
+    letter-spacing: 2px;
+}
+
+.logout {
+    color: #e32072;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.post-message-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 800px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.post-message-wrapper select, .post-message-wrapper input {
+    padding: 15px;
+    margin-bottom: 30px;
+}
+
+.post-message-wrapper input, .post-message-wrapper .send-msg {
+    opacity: 1;
+    transition: all .5s ease-in-out;
+}
+
+.post-message-wrapper .send-msg-wrapper {
+    text-align: center;
+}
+
+.post-message-wrapper input.disabled, .post-message-wrapper .send-msg.disabled {
+    opacity: 0;
+}

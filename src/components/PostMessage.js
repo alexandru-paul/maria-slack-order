@@ -6,8 +6,7 @@ class PostMessage extends Component {
     for (const key in parameters) {
         if (parameters.hasOwnProperty(key)) {
             const value = parameters[key];
-            qs +=
-                encodeURIComponent(key) + "=" + encodeURIComponent(value) + "&";
+            qs += encodeURIComponent(key) + "=" + encodeURIComponent(value) + "&";
         }
     }
     if (qs.length > 0) {
@@ -36,12 +35,25 @@ class PostMessage extends Component {
   }
 
   handleDisabled = (e) => {
-    ((document.querySelector('.food-vendor').value !== '') && (document.querySelector('.order-msg').value !== '') ) ? document.querySelector('.send-msg').classList.remove('disabled') : document.querySelector('.send-msg').classList.add('disabled');
+    if ((document.querySelector('.food-vendor').value !== '') && (document.querySelector('.order-msg').value !== '') ) {
+      document.querySelector('.send-msg').classList.remove('disabled');
+    }
+    else {
+      document.querySelector('.send-msg').classList.add('disabled');
+    }
+
+    if(e.target.classList.contains('food-vendor') && (document.querySelector('.food-vendor').value !== '')) {
+      document.querySelector('.order-msg').classList.remove('disabled');
+    }
+    else if((document.querySelector('.food-vendor').value == '')) {
+      document.querySelector('.order-msg').classList.add('disabled');
+    }
   }
 
   render() {
     return (
       <div className="post-message-wrapper">
+
         <select className="food-vendor" onChange={ this.handleDisabled }>
           <option value="">Please Select a Food Vendor</option>
           <option value="Grafitti">Grafitti</option>
@@ -49,8 +61,11 @@ class PostMessage extends Component {
           <option value="Almondo">Almondo</option>
           <option value="Fabio">Fabio Pizza</option>
         </select>
-        <input type="text" name="order" placeholder="Write down your order here:" className="order-msg" onChange={ this.handleDisabled }/>
-        <a href="#" className="send-msg disabled" onClick={ this.postMessage }>Send Message</a>
+        <input type="text" name="order" placeholder="Write down your order here" className="order-msg disabled" onChange={ this.handleDisabled }/>
+        <div className="send-msg-wrapper">
+          <a href="#" className="send-msg disabled" onClick={ this.postMessage }>Send Message</a>
+        </div>
+
       </div>
     );
   }
