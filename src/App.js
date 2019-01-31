@@ -18,9 +18,7 @@ class App extends Component {
     if(document.location.toString().indexOf('?') !== -1) {
         var query = document.location
                       .toString()
-                      // get the query string
                       .replace(/^.*?\?/, '')
-                      // and remove any existing hash string (thanks, @vrijdenker)
                       .replace(/#.*$/, '')
                       .split('&');
 

@@ -31,13 +31,12 @@ class PostMessage extends Component {
     e.preventDefault();
     if(!e.target.classList.contains('disabled')) {
       fetch(fetchUrl).then(response => response.json()).then((data) => {
-        console.log(data);
         if(data.ok) {
-          document.querySelector('.user-feedback').innerHTML = 'Message succesfully sent!<br/>Thank you for using the app, see you next time :)';
-          document.querySelector('.user-feedback').style.opacity = 1;
-          document.querySelector('.user-feedback').style.zIndex = 1;
-          document.querySelector('.food-vendor').value = '';
-          document.querySelector('.order-msg').value = '';
+          document.querySelectorAll('.user-feedback').forEach((el) => {
+            el.style.opacity = 1;
+            el.style.zIndex = 1
+          });
+          document.querySelectorAll('.food-vendor, .order-msg').forEach(el => el.value = '');
           document.querySelectorAll('a.send-msg, input.order-msg, .menu-link').forEach(el => el.classList.add('disabled'));
         }
       });
@@ -76,13 +75,11 @@ class PostMessage extends Component {
     }
 
     if(e.target.classList.contains('food-vendor') && (document.querySelector('.food-vendor').value !== '')) {
-      document.querySelector('.order-msg').classList.remove('disabled');
+      document.querySelectorAll('.order-msg, .menu-link').forEach(el => el.classList.remove('disabled'));
       this.showMenu(e.target.value);
-      document.querySelector('.menu-link').classList.remove('disabled');
     }
-    else if((document.querySelector('.food-vendor').value == '')) {
-      document.querySelector('.order-msg').classList.add('disabled');
-      document.querySelector('.menu-link').classList.add('disabled');
+    else if((document.querySelector('.food-vendor').value === '')) {
+      document.querySelectorAll('.order-msg, .menu-link').forEach(el => el.classList.add('disabled'));
     }
   }
 
@@ -107,7 +104,9 @@ class PostMessage extends Component {
         <div className="send-msg-wrapper">
           <a href="#" className="send-msg disabled" onClick={ this.postMessage }>Send Message</a>
         </div>
-        <div className="user-feedback" onClick={this.hideConfirmation}></div>
+        <div className="user-feedback" onClick={this.hideConfirmation}>
+          <span>Message succesfully sent!<br/>Thank you for using the app, see you next time :)</span>
+        </div>
 
       </div>
     );
