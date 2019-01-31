@@ -30,7 +30,17 @@ class PostMessage extends Component {
                   });
     e.preventDefault();
     if(!e.target.classList.contains('disabled')) {
-      fetch(fetchUrl).then(response => response.json()).then(data => console.log(data));
+      fetch(fetchUrl).then(response => response.json()).then((data) => {
+        console.log(data);
+        if(data.ok) {
+          document.querySelector('.user-feedback').innerHTML = 'Message succesfully sent!<br/>Thank you for using the app, see you next time :)';
+          document.querySelector('.user-feedback').style.opacity = 1;
+          document.querySelector('.user-feedback').style.zIndex = 1;
+          document.querySelector('.food-vendor').value = '';
+          document.querySelector('.order-msg').value = '';
+          document.querySelectorAll('a.send-msg, input.order-msg').forEach(el => el.classList.add('disabled'));
+        }
+      });
     }
   }
 
@@ -44,10 +54,17 @@ class PostMessage extends Component {
 
     if(e.target.classList.contains('food-vendor') && (document.querySelector('.food-vendor').value !== '')) {
       document.querySelector('.order-msg').classList.remove('disabled');
+      document.querySelector('.user-feedback').style.opacity = 0;
     }
     else if((document.querySelector('.food-vendor').value == '')) {
       document.querySelector('.order-msg').classList.add('disabled');
     }
+  }
+
+  hideConfirmation = (e) => {
+    e.preventDefault();
+    e.target.style.opacity = 0;
+    e.target.style.zIndex = -1;
   }
 
   render() {
@@ -65,6 +82,7 @@ class PostMessage extends Component {
         <div className="send-msg-wrapper">
           <a href="#" className="send-msg disabled" onClick={ this.postMessage }>Send Message</a>
         </div>
+        <div className="user-feedback" onClick={this.hideConfirmation}></div>
 
       </div>
     );

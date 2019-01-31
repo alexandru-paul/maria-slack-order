@@ -72,13 +72,36 @@
 }
 
 .post-message-wrapper {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    max-width: 800px;
+    max-width: 650px;
     width: 100%;
     margin-left: auto;
     margin-right: auto;
+}
+
+.user-feedback {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    cursor: pointer;
+    background-color:rgb(0,122,90);
+    padding: 60px 10%;
+    opacity: 0;
+    color: #fff;
+    text-align: center;
+    transition: all .35s ease-in-out;
+}
+
+.user-feedback:after {
+    content: 'x';
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: #fff;
 }
 
 .post-message-wrapper select, .post-message-wrapper input {
