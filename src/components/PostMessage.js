@@ -44,6 +44,29 @@ class PostMessage extends Component {
     }
   }
 
+  showMenu = (foodVendor) => {
+    let menuLink = '';
+
+    switch(foodVendor) {
+      case 'Grafitti' :
+        menuLink = 'http://www.graffitifoods.ro/#meniu';
+        break;
+
+      case 'Almondo' :
+        menuLink = 'https://www.almondopizza.ro/';
+        break;
+
+      case 'Fabio' :
+        menuLink = 'https://www.fabiopizza.ro/';
+        break;
+
+      default :
+        menuLink = '';
+    }
+
+    document.querySelector('.menu-link').innerHTML = '<a href="'+ menuLink +'" target="_blank">Meniu '+ foodVendor +'</a>';
+  }
+
   handleDisabled = (e) => {
     if ((document.querySelector('.food-vendor').value !== '') && (document.querySelector('.order-msg').value !== '') ) {
       document.querySelector('.send-msg').classList.remove('disabled');
@@ -54,10 +77,12 @@ class PostMessage extends Component {
 
     if(e.target.classList.contains('food-vendor') && (document.querySelector('.food-vendor').value !== '')) {
       document.querySelector('.order-msg').classList.remove('disabled');
-      document.querySelector('.user-feedback').style.opacity = 0;
+      this.showMenu(e.target.value);
+      document.querySelector('.menu-link').classList.remove('disabled');
     }
     else if((document.querySelector('.food-vendor').value == '')) {
       document.querySelector('.order-msg').classList.add('disabled');
+      document.querySelector('.menu-link').classList.add('disabled');
     }
   }
 
@@ -74,10 +99,10 @@ class PostMessage extends Component {
         <select className="food-vendor" onChange={ this.handleDisabled }>
           <option value="">Please Select a Food Vendor</option>
           <option value="Grafitti">Grafitti</option>
-          <option value="Gustacio">Gustacio</option>
           <option value="Almondo">Almondo</option>
           <option value="Fabio">Fabio Pizza</option>
         </select>
+        <div className="menu-link disabled"></div>
         <input type="text" name="order" placeholder="Write down your order here" className="order-msg disabled" onChange={ this.handleDisabled }/>
         <div className="send-msg-wrapper">
           <a href="#" className="send-msg disabled" onClick={ this.postMessage }>Send Message</a>

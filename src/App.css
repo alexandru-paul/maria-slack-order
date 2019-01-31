@@ -53,7 +53,8 @@
     margin-bottom: 30px;
 }
 
-.login a, .post-message-wrapper .send-msg {
+.login a, .post-message-wrapper .send-msg,
+.post-message-wrapper .menu-link a {
     display: inline-block;
     align-self: center;
     padding: 10px 30px;
@@ -87,6 +88,7 @@
     top: 0px;
     left: 0px;
     right: 0px;
+    z-index: -1;
     cursor: pointer;
     background-color:rgb(0,122,90);
     padding: 60px 10%;
@@ -109,7 +111,7 @@
     margin-bottom: 30px;
 }
 
-.post-message-wrapper input, .post-message-wrapper .send-msg {
+.post-message-wrapper .menu-link, .post-message-wrapper input, .post-message-wrapper .send-msg {
     opacity: 1;
     transition: all .5s ease-in-out;
 }
@@ -118,6 +120,17 @@
     text-align: center;
 }
 
-.post-message-wrapper input.disabled, .post-message-wrapper .send-msg.disabled {
+.post-message-wrapper .menu-link.disabled, .post-message-wrapper input.disabled, .post-message-wrapper .send-msg.disabled {
     opacity: 0;
+}
+
+.post-message-wrapper .menu-link {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.post-message-wrapper .menu-link a
+{
+    background-color: #E1A947;
+    text-transform: uppercase;
 }
