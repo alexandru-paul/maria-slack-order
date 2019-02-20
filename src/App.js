@@ -38,9 +38,8 @@ class App extends Component {
       access_token = access_token[2];
       this.setState({access_token});
     }
-    let getUserDataUrl = 'https://slack.com/api/users.profile.get?token='+ access_token;
     {access_token &&
-      fetch(getUserDataUrl).then(response => response.json()).then((data) => {
+      fetch('https://slack.com/api/users.profile.get?token='+ access_token).then(response => response.json()).then((data) => {
         {!data.ok &&
           this.setState({
             login_error: data.error
