@@ -1,0 +1,1 @@
+Small React App for logging into Slack and posting a message in a channel on behalf of the logged-in user.
