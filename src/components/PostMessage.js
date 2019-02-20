@@ -18,11 +18,11 @@ class PostMessage extends Component {
   }
 
   postMessage = (e) => {
-    let getprm = this.props.getQueryString('access_token');
+    let access_token = this.props.access_token;
     let order_message = document.querySelector('.order-msg').value;
     let food_vendor = document.querySelector('.food-vendor').value;
     let fetchUrl = this.buildUrl('https://slack.com/api/chat.postMessage',{
-                    token : getprm,
+                    token : access_token,
                     channel :'GFLS780EN',
                     text : '<@U0MUWKVEY> Hey! I\'d like to order: *' + order_message + '* from: *' + food_vendor + '*',
                     as_user : 'true',

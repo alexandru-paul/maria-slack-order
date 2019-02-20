@@ -7,6 +7,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+      access_token: 'not_set',
       login_error: '',
       username: '',
       avatar: '',
@@ -32,8 +33,13 @@ class App extends Component {
   }
 
   componentDidMount() {
-    let getUserDataUrl = 'https://slack.com/api/users.profile.get?token='+ this.getQueryString('access_token');
-    {this.getQueryString('access_token') &&
+    let access_token = document.cookie.match(new RegExp('(^| )' + 'maria_order_access_token' + '=([^;]+)'));
+    if (access_token) {
+      access_token = access_token[2];
+      this.setState({access_token});
+    }
+    let getUserDataUrl = 'https://slack.com/api/users.profile.get?token='+ access_token;
+    {access_token &&
       fetch(getUserDataUrl).then(response => response.json()).then((data) => {
         {!data.ok &&
           this.setState({
@@ -55,11 +61,11 @@ class App extends Component {
     return (
       <Fragment>
         <div className="header container">
-          <Authorization {...this.state} getQueryString={this.getQueryString} />
+          <Authorization {...this.state} />
         </div>
         <div className="app container">
           {this.state.username &&
-            <PostMessage {...this.state} getQueryString={this.getQueryString}/>
+            <PostMessage {...this.state} />
           }
         </div>
       </Fragment>
