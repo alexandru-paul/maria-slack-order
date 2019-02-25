@@ -14,24 +14,6 @@ class App extends Component {
     }
   }
 
-  getQueryString(param) {
-    let getParams = {};
-    if(document.location.toString().indexOf('?') !== -1) {
-        var query = document.location
-                      .toString()
-                      .replace(/^.*?\?/, '')
-                      .replace(/#.*$/, '')
-                      .split('&');
-
-        for(var i=0, l=query.length; i<l; i++) {
-          var aux = decodeURIComponent(query[i]).split('=');
-          getParams[aux[0]] = aux[1];
-        }
-    }
-    
-    return getParams[param];
-  }
-
   componentDidMount() {
     let access_token = document.cookie.match(new RegExp('(^| )' + 'maria_order_access_token' + '=([^;]+)'));
     if (access_token) {
